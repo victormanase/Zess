@@ -64,7 +64,7 @@ class Controller extends BaseController
         $this->view_root = $view_root;
 
         $this->defaultModel = $defaultModel;
-        $this->is_editing = $this->hasId();
+        $this->isEditing = $this->hasId();
         $this->request = request();
 
         $this->middleware($middleware);

@@ -15,6 +15,7 @@ return [
         'administrator' => [],
         'manager' => [],
         'patient' => [],
-        'doctor' => []
+        'doctor' => [],
+        'client' => []
     ]
 ];

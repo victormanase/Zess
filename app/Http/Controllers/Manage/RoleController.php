@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers\Manage;
 
+use App\DataTables\RoleDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct() {
+        $this->initialise(
+            "/manage/roles",
+            "manage.roles.",
+            [],
+            [],
+            Role::class
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RoleDataTable $roleDataTable)
     {
-        //
+        $title = 'Manage Roles';
+        $create = route("manage.roles.create");
+        return $roleDataTable->render("layout.table", compact("title", "create"));
     }
 
     /**
@@ -24,7 +38,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return $this->cView("form");
     }
 
     /**
@@ -35,7 +49,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create($request->all());
+        return redirect($this->root_url)->with("success", "Added successfully");
     }
 
     /**
@@ -57,7 +72,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->isEditing = true;
+        $this->role = Role::find($id);
+        return $this->cView("form");
     }
 
     /**
@@ -69,7 +86,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Role::find($id)->update($request->all());
+        return redirect($this->root_url)->with("success", "Updated successfully");
     }
 
     /**
@@ -80,6 +98,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::destroy($id);
+        return redirect()->back()->with("success", "Role removed successfully");
     }
 }

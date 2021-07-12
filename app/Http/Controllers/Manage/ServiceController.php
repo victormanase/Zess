@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->initialise(
             "/manage/services",
             "manage.services",
@@ -26,7 +27,9 @@ class ServiceController extends Controller
      */
     public function index(ServiceDataTable $dataTable)
     {
-        return $dataTable->render("layout.table", ['title'=>'Manage Services']);
+        $title = 'Manage Services';
+        $create = route("manage.services.create");
+        return $dataTable->render("layout.table", compact("title", "create"));
     }
 
     /**
@@ -36,7 +39,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return $this->cView("form");
     }
 
     /**
@@ -47,18 +50,8 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $service = Service::create($request->all());
+        return redirect($this->root_url)->with("success", "Added successfully");
     }
 
     /**
@@ -69,7 +62,9 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->isEditing = true;
+        $this->service = Service::find($id);
+        return $this->cView("form");
     }
 
     /**
@@ -81,7 +76,8 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Service::find($id)->update($request->all());
+        return redirect($this->root_url)->with("success", "Updated successfully");
     }
 
     /**
@@ -92,6 +88,7 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Service::destroy($id);
+        return redirect()->back()->with("success", "Service removed successfully");
     }
 }

@@ -35,6 +35,7 @@
         @include('layout.header')
         <div class="page-wrapper">
             <div class="page-content">
+                @include('components.notifications')
                 @yield('content')
             </div>
             @include('layout.footer')

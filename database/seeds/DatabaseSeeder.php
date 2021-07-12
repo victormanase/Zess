@@ -1,6 +1,8 @@
 <?php
 
+
 use Database\Seeders\LaratrustSeeder;
+use Database\Seeders\PatientTypesTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->call(PatientTypesTableSeeder::class);
         $this->call(LaratrustSeeder::class);
     }
 }

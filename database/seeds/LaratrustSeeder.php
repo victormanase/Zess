@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -66,9 +69,26 @@ class LaratrustSeeder extends Seeder
                 $user = \App\Models\User::create([
                     'name' => ucwords(str_replace('_', ' ', $key)),
                     'email' => $key . '@zess.co.tz',
-                    'password' => bcrypt('password')
+                    'password' => 'password'
                 ]);
                 $user->attachRole($role);
+                if ($key == "doctor") {
+                    Doctor::create([
+                        "user_id" => $user->id,
+                    ]);
+                }
+                if ($key == "client") {
+                    Client::create([
+                        "user_id" => $user->id,
+                    ]);
+                }
+                if ($key == "patient") {
+                    Patient::create([
+                        "user_id" => $user->id,
+                        "patient_type_id" => 1,
+                        "client_id" => 1
+                    ]);
+                }
             }
         }
     }

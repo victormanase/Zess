@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item {{ active_class(['patients/*', 'clients/*', 'doctors/*', 'managers/*', 'administrators/*']) }}">
+                    class="nav-item {{ active_class(['users/*']) }}">
                     <a href="#" class="nav-link">
                         <i class="link-icon" data-feather="mail"></i>
                         <span class="menu-title">Users</span>
@@ -71,23 +71,19 @@
                         <ul class="submenu-item">
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/doctors') }}">Doctors</a>
+                                    href="{{ route("users.doctors.index") }}">Doctors</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/patients') }}">Patients</a>
+                                    href="{{ route("users.patients.index") }}">Patients</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/managers') }}">Managers</a>
+                                    href="{{ route("users.clients.index") }}">Clients</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/clients') }}">Clients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/administrators') }}">Administrators</a>
+                                    href="{{ route("users.index") }}">Users</a>
                             </li>
                         </ul>
                     </div>
@@ -105,10 +101,10 @@
                                 <a class="nav-link {{ active_class(["manage/services*",]) }}"
                                     href="{{ url('/manage/services') }}">Services</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
                                     href="{{ url('/manage/invoices') }}">Invoices</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
                                     href="{{ url('/manage/roles') }}">Roles</a>
@@ -119,12 +115,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ url('/manage/expenses/categories') }}">Expense Categories</a>
+                                    href="{{ route("manage.expense-categories.index") }}">Expense Categories</a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li
+                {{-- <li
                     class="nav-item {{ active_class(['reports/*']) }}">
                     <a href="#" class="nav-link">
                         <i class="link-icon" data-feather="mail"></i>
@@ -139,7 +135,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <li
                     class="nav-item {{ active_class(['settings/*']) }}">
                     <a href="#" class="nav-link">

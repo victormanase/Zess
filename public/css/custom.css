@@ -4,7 +4,7 @@
     border-left: 0;
     border-bottom: 0;
     font: normal normal normal 24px/1 "feather";
-    content: "";
+    content: "";
     width: auto;
     height: auto;
     vertical-align: middle;
@@ -13,11 +13,23 @@
     margin-left: 0px;
 }
 
+.dropdown-item-pad{
+    padding: 12px 13px !important;
+}
+
 .action-button > .btn {
     width: 38px !important;
     height: 35px !important;
     padding: 2px;
+    background-color: white !important;
+    color: black !important;
+    border: none !important;
+    font-weight: 900;
 }
+.action-button > .btn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+}
+
 .action-button > .btn > i {
     font-size: 14px;
 }
@@ -25,7 +37,6 @@
 .in-dropdown-button {
     background: white;
     border: none;
-    margin-left: 7px;
     width: 100%;
     text-align: left;
 }

@@ -22,10 +22,12 @@ class ServiceDataTable extends BaseDataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('actions', fn($service)=>$this->getActions([
-                "view"=> route("manage.services.show", $service->id),
                 "edit"=> route("manage.services.edit", $service->id),
                 "delete"=>route("manage.services.destroy", $service->id)
             ]))
+            ->editColumn("price",function($service){
+                return "Tsh. ".number_format($service->price);
+            })
             ->rawColumns(['actions']);
     }
 
@@ -52,7 +54,6 @@ class ServiceDataTable extends BaseDataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom($this->getDom())
-                    ->orderBy(1)
                     ->buttons(
                         Button::make('export'),
                         Button::make('print'),

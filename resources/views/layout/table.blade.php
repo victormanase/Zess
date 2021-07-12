@@ -1,22 +1,28 @@
 @extends('layout.master')
 
 @section('content')
-    <nav class="page-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-            @isset($title)
-                <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
-            @endisset
-        </ol>
-    </nav>
-
+    @include('components.breadcrumb')
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    @isset($title)
-                        <h6 class="card-title">{{ $title }}</h6>
-                    @endisset
+                    <div class="row">
+                        <div class="col-md-10">
+                            @isset($title)
+                                <h6 class="card-title">{{ $title }}</h6>
+                            @endisset
+                        </div>
+                        <div class="col-md-2 text-right">
+                            @isset($create)
+                                <a href="{{ $create }}" class="btn btn-primary">
+                                    <i class="mdi mdi-plus"></i>
+                                    Create</a>
+                            @endisset
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                    </div>
                     <div class="table-responive">
                         {{ $dataTable->table() }}
                     </div>
