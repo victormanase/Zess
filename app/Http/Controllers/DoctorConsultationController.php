@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\ConsultationInvestigation;
+use App\Models\ConsultationPd;
+use App\Models\ConsultationPlan;
 use App\Models\Doctor;
 use App\Models\Service;
+use App\Utils\Traits\ConsultationTrait;
 use Illuminate\Http\Request;
 
 class DoctorConsultationController extends Controller
@@ -57,9 +61,26 @@ class DoctorConsultationController extends Controller
             "description" => "required"
         ]);
 
-        Consultation::create($request->merge([
+        $consultation = Consultation::create($request->merge([
             "charge" => Service::find($request->service_id)->price
         ])->all());
+
+        if ($request->has("plans")) {
+            foreach ($request->plans as $key => $plan) {
+                $consultation->plans()->create(["content" => $plan]);
+            }
+        }
+        if ($request->has("pds")) {
+            foreach ($request->pds as $key => $pd) {
+                $consultation->pds()->create(["content" => $pd]);
+            }
+        }
+
+        if ($request->has("investigations")) {
+            foreach ($request->investigations as $key => $investigation) {
+                $consultation->investigations()->create(["content" => $investigation]);
+            }
+        }
 
         return redirect()->route("users.doctors.show", $doctor->id)->with("success", "Consultation created successfully");
     }
@@ -70,9 +91,11 @@ class DoctorConsultationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Doctor $doctor, Consultation $consultation)
     {
-        //
+        $this->consultation = $consultation;
+        $this->title = "Viewing Consultation";
+        return view("components.show-consultation", $this->view_data);
     }
 
     /**
@@ -109,6 +132,27 @@ class DoctorConsultationController extends Controller
         $consultation->update($request->merge([
             "charge" => Service::find($request->service_id)->price
         ])->all());
+
+        if ($request->has("plans")) {
+            $consultation->plans()->delete();
+            foreach ($request->plans as $key => $plan) {
+                $consultation->plans()->create(["content" => $plan]);
+            }
+        }
+
+        if ($request->has("pds")) {
+            $consultation->plans()->delete();
+            foreach ($request->pds as $key => $pd) {
+                $consultation->pds()->create(["content" => $pd]);
+            }
+        }
+
+        if ($request->has("investigations")) {
+            $consultation->plans()->delete();
+            foreach ($request->investigations as $key => $investigation) {
+                $consultation->investigations()->create(["content" => $investigation]);
+            }
+        }
 
         return redirect()->route("users.doctors.show", $doctor->id)->with("success", "Consultation updated successfully");
     }

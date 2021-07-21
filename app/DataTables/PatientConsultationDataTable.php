@@ -29,11 +29,15 @@ class PatientConsultationDataTable extends BaseDataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('actions', fn ($consultation) => $this->getActions([
-                "edit" => route("users.users.patients.consultations.edit", [
+                "show" => route('users.patients.consultations.show', [
                     "consultation" => $consultation->id,
                     "patient" => $consultation->patient_id
                 ]),
-                "delete" =>  route("users.users.patients.consultations.destroy", [
+                "edit" => route("users.patients.consultations.edit", [
+                    "consultation" => $consultation->id,
+                    "patient" => $consultation->patient_id
+                ]),
+                "delete" =>  route("users.patients.consultations.destroy", [
                     "consultation" => $consultation->id,
                     "patient" => $consultation->patient_id
                 ])

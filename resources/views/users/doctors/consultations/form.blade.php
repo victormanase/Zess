@@ -4,16 +4,15 @@
     @component('components.form', [
         'size' => 12,
         'url' => $isEditing
-        ? route('users.users.doctors.consultations.update', [
+        ? route('users.doctors.consultations.update', [
         'consultation' => $consultation->id,
         'doctor' => $consultation->doctor_id,
         ])
-        : route('users.users.doctors.consultations.store', $doctor->id),
+        : route('users.doctors.consultations.store', $doctor->id),
         'title' => $isEditing ? 'Edit Consultation' : 'Create a Consultation',
         'method' => $isEditing ? 'PUT' : null,
         ])
         <div class="row">
-
             <div class="form-group col-md-4">
                 <label for="">Service</label>
                 <div>
@@ -62,6 +61,7 @@
                     class="form-control">{{ $consultation->description ?? old('description') }}</textarea>
             </div>
         </div>
+        @include('components.consultation-details-form')
     @endcomponent
 @endsection
 @include('components.inputmask')

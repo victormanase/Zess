@@ -39,7 +39,30 @@ class ViewServiceProvider extends ServiceProvider
             View::share("patients", Patient::all());
             View::share("doctors", Doctor::all());
             View::share("services", Service::all());
+            View::share("genders", $this->getGenders());
         } catch (\Throwable $th) {
         }
+    }
+
+    public function getGenders()
+    {
+        $genders = [
+            (object)[
+                "name" => "male",
+                "gender" => "male",
+                "id" => "male"
+            ],
+            (object)[
+                "name" => "female",
+                "gender" => "female",
+                "id" => "female"
+            ],
+            (object)[
+                "name" => "other",
+                "gender" => "other",
+                "id" => "other"
+            ]
+        ];
+        return $genders;
     }
 }

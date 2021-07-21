@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DoctorConsultationController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [MainController::class, 'dashboard']);
 
+    Route::group(['prefix' => 'consultations', 'as' => 'consultations.'], function () {
+        Route::get('{consultation}/invoice', [ConsultationController::class, 'getInvoice'])->name("get-invoice");
+    });
+
     Route::group(["prefix" => "manage", "as" => "manage."], function () {
         Route::resources([
             "services" => ServiceController::class,
@@ -28,19 +33,21 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(["prefix" => "users", "as" => "users."], function () {
+
         Route::resources([
             "doctors" => DoctorController::class,
             "patients" => PatientController::class,
             "clients" => ClientController::class
         ]);
-        Route::prefix('users/patients')->as("users.patients.")->group(function () {
+
+        Route::prefix('patients')->as("patients.")->group(function () {
             Route::resources([
-                "{patient}/consultations"=>PatientConsultationController::class
+                "{patient}/consultations" => PatientConsultationController::class
             ]);
         });
-        Route::prefix('users/doctors')->as("users.doctors.")->group(function () {
+        Route::prefix('doctors')->as("doctors.")->group(function () {
             Route::resources([
-                "{doctor}/consultations"=>DoctorConsultationController::class
+                "{doctor}/consultations" => DoctorConsultationController::class
             ]);
         });
     });

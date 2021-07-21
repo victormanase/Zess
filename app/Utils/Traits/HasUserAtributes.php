@@ -18,6 +18,4 @@ trait HasUserAtributes{
     {
         return $this->user->email;
     }
-
-
 }

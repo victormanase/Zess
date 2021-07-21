@@ -26,6 +26,7 @@
 <script src="{{ asset('assets/js/bootstrap-colorpicker.js') }}"></script>
 <script src="{{ asset('assets/js/datepicker.js') }}"></script>
 <script src="{{ asset('assets/js/timepicker.js') }}"></script>
+<script src="//unpkg.com/alpinejs" defer></script>
 @endpush
 
 @push('plugin-styles')

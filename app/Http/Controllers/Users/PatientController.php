@@ -55,15 +55,18 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             "email" => "required|email|unique:users,email",
-            "password" => "required|confirmed",
+            "password" => 'sometimes|nullable|confirmed',
+            "password_confirmation" => "exclude_if:password,null|required",
+            "patient_type_id"=>"required|exists:patient_types,id",
             "client_id" => "required|exists:clients,id"
         ]);
 
         DB::transaction(function () use ($request) {
-            $user = User::create($request->all());
+            $user = User::create($request->merge([
+                "password"=>"password"
+            ])->all());
             Patient::create($request->merge([
                 "user_id" => $user->id
             ])->all());

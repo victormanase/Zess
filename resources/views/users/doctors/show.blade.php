@@ -20,7 +20,7 @@
                     <div class="mt-3">
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
                         <p class="text-muted">{{ $doctor->user->email }}</p>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                                     <h6 class="card-title">Consultations</h6>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <a href="{{ route('users.users.doctors.consultations.create', $doctor->id) }}"
+                                    <a href="{{ route('users.doctors.consultations.create', $doctor->id) }}"
                                         class="btn btn-primary">
                                         <i class="mdi mdi-plus"></i>
                                         Create</a>

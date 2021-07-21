@@ -5,6 +5,12 @@
             ...
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            @isset($createConsultation)
+                <a class="dropdown-item dropdown-item-pad" href="{{ $createConsultation }}"><i class="mdi mdi-ambulance"></i> Create Consultation</a>
+            @endisset
+            @isset($getInvoice)
+                <a class="dropdown-item dropdown-item-pad" href="{{ $getInvoice }}"><i class="mdi mdi-book"></i> Get Invoice</a>
+            @endisset
             @isset($show)
                 <a class="dropdown-item dropdown-item-pad" href="{{ $show }}"><i class="mdi mdi-eye"></i> View</a>
             @endisset

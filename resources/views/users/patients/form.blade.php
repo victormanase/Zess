@@ -30,13 +30,38 @@
                 </div>
             </div>
             <div class="form-group col-md-4">
+                <label for="">Date of Birth</label>
+                <div class="input-group date datepicker" id="datePickerExample">
+                    <input type="text" name="date_of_birth" class="form-control"
+                        value="{{ (old('date_of_birth') ?: null) ?? (isset($patient) ? $patient->date_of_birth->format('Y-m-d') : null) }}"><span
+                        class="input-group-addon"><i data-feather="calendar"></i></span>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Gender</label>
+                <div>
+                    @include('components.select',[
+                    "item_name"=>"gender",
+                    "item_name_field"=>"name",
+                    "collection"=>$genders,
+                    "data"=>$patient??null
+                    ])
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Address</label>
+                <textarea name="address" id="" cols="30" rows="3"
+                    class="form-control">{{ $patient->address ?? old("address") }}</textarea>
+            </div>
+            <div class="form-group col-md-4">
                 <label for="">Client</label>
                 <div>
                     @include('components.select',[
                     "item_name"=>"client_id",
                     "item_name_field"=>"name",
                     "collection"=>$systemClients,
-                    "data"=>$patient??null
+                    "data"=>$patient??null,
+                    "emptyField"=>"Select client"
                     ])
                 </div>
             </div>
@@ -47,15 +72,16 @@
                     "item_name"=>"patient_type_id",
                     "item_name_field"=>"name",
                     "collection"=>$patientTypes,
-                    "data"=>$patient??null
+                    "data"=>$patient??null,
+                    "emptyField"=>"Select patient type"
                     ])
                     </select>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4" style="display: none">
                 <label for="">Password</label>
                 <div>
-                    <input type="password" name="password" class="form-control" autocomplete="off" value=""
+                    <input type="hidden" name="password" class="form-control" autocomplete="off" value=""
                         {{ $isEditing ? '' : 'required' }}>
                     @if ($isEditing)
                         <small>(If you write a password here and edit, it will replace the old one, and will also need
@@ -63,10 +89,10 @@
                     @endif
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4" style="display: none">
                 <label for="">Confirm Password</label>
                 <div>
-                    <input type="password" name="password_confirmation" class="form-control" autocomplete="off" value=""
+                    <input type="hidden" name="password_confirmation" class="form-control" autocomplete="off" value=""
                         {{ $isEditing ? '' : 'required' }}>
                 </div>
             </div>
@@ -74,3 +100,4 @@
     @endcomponent
 @endsection
 @include('components.inputmask')
+@include('components.advanced-form')

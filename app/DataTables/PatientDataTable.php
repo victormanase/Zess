@@ -21,7 +21,8 @@ class PatientDataTable extends BaseDataTable
             ->addColumn('actions', fn ($patient) => $this->getActions([
                 "edit" => route("users.patients.edit", $patient->id),
                 "delete" =>  route("users.patients.destroy", $patient->id),
-                "show" => route("users.patients.show", $patient->id)
+                "show" => route("users.patients.show", $patient->id),
+                "createConsultation"=>route("users.patients.consultations.create",$patient->id)
             ]))
             ->addColumn("name", fn ($patient) => $patient->user->name)
             ->addColumn("email", fn ($patient) => $patient->user->email)

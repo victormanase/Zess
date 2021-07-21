@@ -29,6 +29,18 @@
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Type:</label>
                         <p class="text-muted">{{ $patient->patientType->name }}</p>
                     </div>
+                    <div class="mt-3">
+                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Date of Birth:</label>
+                        <p class="text-muted">{{ $patient->date_of_birth }}</p>
+                    </div>
+                    <div class="mt-3">
+                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Gender:</label>
+                        <p class="text-muted">{{ $patient->gender }}</p>
+                    </div>
+                    <div class="mt-3">
+                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Address:</label>
+                        <p class="text-muted">{{ $patient->address }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +56,7 @@
                                     <h6 class="card-title">Consultations</h6>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <a href="{{ route('users.users.patients.consultations.create', $patient->id) }}"
+                                    <a href="{{ route('users.patients.consultations.create', $patient->id) }}"
                                         class="btn btn-primary">
                                         <i class="mdi mdi-plus"></i>
                                         Create</a>
