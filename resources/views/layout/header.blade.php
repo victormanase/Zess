@@ -75,10 +75,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class([]) }}"
-                                    href="{{ route("users.patients.index") }}">Patients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ active_class([]) }}"
                                     href="{{ route("users.clients.index") }}">Clients</a>
                             </li>
                             <li class="nav-item">
@@ -89,7 +85,7 @@
                     </div>
                 </li>
                 <li
-                    class="nav-item {{ active_class(['manage/*']) }}">
+                    class="nav-item {{ active_class(['manage/*','users/patients/*']) }}">
                     <a href="#" class="nav-link">
                         <i class="link-icon" data-feather="mail"></i>
                         <span class="menu-title">Manage</span>
@@ -97,6 +93,10 @@
                     </a>
                     <div class="submenu">
                         <ul class="submenu-item">
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(["users/patients/*"]) }}"
+                                    href="{{ route("manage.patients.index") }}">Patients</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ active_class(["manage/services*",]) }}"
                                     href="{{ url('/manage/services') }}">Services</a>

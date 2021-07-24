@@ -14,7 +14,7 @@ class PatientConsultationController extends Controller
     {
         $this->initialise(
             "",
-            "users.patients.consultations",
+            "manage.patients.consultations",
             [],
             [],
             Consultation::class
@@ -81,7 +81,7 @@ class PatientConsultationController extends Controller
             }
         });
 
-        return redirect()->route("users.patients.show", $patient->id)->with("success", "Consultation created successfully");
+        return redirect()->route("manage.patients.show", $patient->id)->with("success", "Consultation created successfully");
     }
 
     /**
@@ -153,7 +153,7 @@ class PatientConsultationController extends Controller
             }
         });
 
-        return redirect()->route("users.patients.show", $patient->id)->with("success", "Consultation updated successfully");
+        return redirect()->route("manage.patients.show", $patient->id)->with("success", "Consultation updated successfully");
     }
 
     /**
@@ -165,6 +165,6 @@ class PatientConsultationController extends Controller
     public function destroy(Patient $patient, Consultation $consultation)
     {
         $consultation->delete();
-        return redirect()->route("users.patients.show", $patient->id)->with("success", "Consultation deleted successfully");
+        return redirect()->route("manage.patients.show", $patient->id)->with("success", "Consultation deleted successfully");
     }
 }

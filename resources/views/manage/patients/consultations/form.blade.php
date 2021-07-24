@@ -4,11 +4,11 @@
     @component('components.form', [
         'size' => 12,
         'url' => $isEditing
-        ? route('users.patients.consultations.update', [
+        ? route('manage.patients.consultations.update', [
         'consultation' => $consultation->id,
         'patient' => $consultation->patient_id,
         ])
-        : route('users.patients.consultations.store', $patient->id),
+        : route('manage.patients.consultations.store', $patient->id),
         'title' => $isEditing ? 'Edit Consultation' : 'Create a Consultation',
         'method' => $isEditing ? 'PUT' : null,
         ])

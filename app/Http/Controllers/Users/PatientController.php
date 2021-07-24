@@ -17,8 +17,8 @@ class PatientController extends Controller
     public function __construct()
     {
         $this->initialise(
-            "users/patients",
-            "users.patients",
+            "manage/patients",
+            "manage.patients",
             [],
             [],
             Patient::class
@@ -33,7 +33,7 @@ class PatientController extends Controller
     public function index(PatientDataTable $patientDataTable)
     {
         $title = "Manage Patients";
-        $create = route("users.patients.create");
+        $create = route("manage.patients.create");
         return $patientDataTable->render("layout.table", compact("title", "create"));
     }
 

@@ -3,7 +3,7 @@
 @section('content')
     @component('components.form', [
         'size' => 12,
-        'url' => $isEditing ? route('users.patients.update', $patient->id) : route('users.patients.store'),
+        'url' => $isEditing ? route('manage.patients.update', $patient->id) : route('manage.patients.store'),
         'title' => $isEditing ? 'Edit Patient' : 'Create a Patient',
         'method' => $isEditing ? 'PUT' : null,
         ])
@@ -27,6 +27,34 @@
                 <div>
                     <input type="number" name="phone" class="form-control" autocomplete="off"
                         value="{{ $user->phone ?? (old('phone') ?? null) }}" required>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Reference no</label>
+                <div>
+                    <input type="text" name="reference_no" class="form-control" autocomplete="off"
+                        value="{{ $patient->reference_no ?? (old('reference_no') ?? null) }}" placeholder="TZA-LDM ####-###">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Hotel/Room</label>
+                <div>
+                    <input type="text" name="hotel_room" class="form-control" autocomplete="off"
+                        value="{{ $patient->hotel_room ?? (old('hotel_room') ?? null) }}">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Complaints</label>
+                <div>
+                    <input type="text" name="complaints" class="form-control" autocomplete="off"
+                        value="{{ $patient->complaints ?? (old('complaints') ?? null) }}">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Note</label>
+                <div>
+                    <input type="text" name="note" class="form-control" autocomplete="off"
+                        value="{{ $patient->note ?? (old('note') ?? null) }}">
                 </div>
             </div>
             <div class="form-group col-md-4">

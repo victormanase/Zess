@@ -10,7 +10,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <h6 class="card-title mb-0">{{ $patient->user->name }}</h6>
                         @include('components.table-actions',[
-                        "edit"=>route("users.patients.edit",$patient->id)
+                        "edit"=>route("manage.patients.edit",$patient->id)
                         ])
                     </div>
                     <div class="mt-3">
@@ -56,7 +56,7 @@
                                     <h6 class="card-title">Consultations</h6>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <a href="{{ route('users.patients.consultations.create', $patient->id) }}"
+                                    <a href="{{ route('manage.patients.consultations.create', $patient->id) }}"
                                         class="btn btn-primary">
                                         <i class="mdi mdi-plus"></i>
                                         Create</a>

@@ -19,7 +19,11 @@ class Patient extends Model
         "patient_type_id",
         "date_of_birth",
         "gender",
-        "address"
+        "address",
+        "hotel_room",
+        "complaints",
+        "note",
+        "reference_no"
     ];
 
 

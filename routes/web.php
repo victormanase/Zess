@@ -28,16 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
             "services" => ServiceController::class,
             "roles" => RoleController::class,
             "expense-categories" => ExpenseCategoryController::class,
-            "expenses" => ExpenseController::class
-        ]);
-    });
-
-    Route::group(["prefix" => "users", "as" => "users."], function () {
-
-        Route::resources([
-            "doctors" => DoctorController::class,
             "patients" => PatientController::class,
-            "clients" => ClientController::class
+            "expenses" => ExpenseController::class
         ]);
 
         Route::prefix('patients')->as("patients.")->group(function () {
@@ -45,6 +37,15 @@ Route::group(['middleware' => 'auth'], function () {
                 "{patient}/consultations" => PatientConsultationController::class
             ]);
         });
+    });
+
+    Route::group(["prefix" => "users", "as" => "users."], function () {
+
+        Route::resources([
+            "doctors" => DoctorController::class,
+            "clients" => ClientController::class
+        ]);
+
         Route::prefix('doctors')->as("doctors.")->group(function () {
             Route::resources([
                 "{doctor}/consultations" => DoctorConsultationController::class
