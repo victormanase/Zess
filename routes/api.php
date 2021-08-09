@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix"=>"doctors"],function(){
     Route::get("/", [DoctorApiController::class, 'index']);
+    Route::get("{doctor_id}/consultations", [DoctorApiController::class, 'consultations']);
 });
 
 Route::group(["prefix"=>"patients"],function(){
     Route::get("/", [PatientApiController::class, 'index']);
 });
+
+// Route::group(["prefix"])
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
