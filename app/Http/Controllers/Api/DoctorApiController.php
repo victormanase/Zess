@@ -18,7 +18,6 @@ class DoctorApiController extends Controller
     public function consultations($doctor_id)
     {
         $doctor = Doctor::find($doctor_id);
-        dd($doctor);
         $consultations = $doctor->consultations;
         return ConsultationResource::collection($consultations);
     }
