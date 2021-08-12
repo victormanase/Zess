@@ -10,6 +10,12 @@ class PatientApiController extends Controller
 {
     public function index()
     {
-        return PatientResource::collection(Patient::all());
+        return res(PatientResource::collection(Patient::all()));
+    }
+
+    public function show($id)
+    {
+        $patient = Patient::find($id);
+        return res(new PatientResource($patient));
     }
 }

@@ -11,6 +11,18 @@ class ConsultationApiController extends Controller
     public function show($consultation_id)
     {
         $consultation = Consultation::find($consultation_id);
-        return new ConsultationResource($consultation);
+        return res(new ConsultationResource($consultation));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            "service_id"=>"required|exists:services,id",
+            "doctor_id"=>"required|exists:doctors,id",
+            "patient_id"=>"required|exists:patients,id",
+            "date"=>"required"
+        ]);
+        $consultation = Consultation::create($request->all());
+        return res(new ConsultationResource($consultation));
     }
 }

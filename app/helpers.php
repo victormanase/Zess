@@ -176,3 +176,17 @@ if (!function_exists("uploadBase64File")) {
         return false;
     }
 }
+
+if(!function_exists("res")){
+    function res($data,  $success = true, $message = null){
+
+        if($message == null)
+            $message = $success? "Request successful": "Request unsuccessful";
+
+        return [
+            "message"=> $message,
+            "success"=> $success,
+            "data"=> $data
+        ];
+    }
+}

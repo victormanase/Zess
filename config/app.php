@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\ResourceServiceProvider;
 use App\Providers\ViewServiceProvider;
 
 return [
@@ -177,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         ViewServiceProvider::class,
+        ResourceServiceProvider::class
 
     ],
 

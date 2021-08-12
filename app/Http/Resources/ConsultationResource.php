@@ -15,8 +15,8 @@ class ConsultationResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
-        $data["patient_name"] = new PatientResource($this->resource->patient->name);
-        $data["doctor_name"] = new DoctorResource($this->resource->doctor->name);
+        $data["patient_name"] = $this->resource->patient->name;
+        $data["doctor_name"] = $this->resource->doctor->name;
         return $data;
     }
 }

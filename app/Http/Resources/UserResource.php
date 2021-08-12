@@ -4,9 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DoctorResource extends JsonResource
+class UserResource extends JsonResource
 {
-    public static $wrap = null;
     /**
      * Transform the resource into an array.
      *
@@ -15,10 +14,8 @@ class DoctorResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            "id"=>$this->resource->id,
-            "name"=>$this->resource->name,
-            "phone"=>$this->resource->phone
-        ];
+        $data = parent::toArray($request);
+        $data["roles"] = RoleResource::collection($this->resource->roles);
+        return $data;
     }
 }
