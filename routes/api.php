@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationApiController;
 use App\Http\Controllers\ConsultationApiController;
 use App\Http\Controllers\DashboardApiController;
 use App\Http\Controllers\PatientApiController;
+use App\Http\Controllers\ServiceApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,31 +20,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(["prefix"=>"auth"], function(){
+Route::group(["prefix" => "auth"], function () {
     Route::post("login", [AuthenticationApiController::class, 'login']);
 });
 
-Route::group(["middleware"=>['auth:api']],function(){
-    Route::get("auth/refresh-token",[AuthenticationApiController::class,'refreshToken']);
-    Route::get("auth/user-profile",[AuthenticationApiController::class,'userProfile']);
+Route::group(["middleware" => ['auth:api']], function () {
+    Route::get("auth/refresh-token", [AuthenticationApiController::class, 'refreshToken']);
+    Route::get("auth/user-profile", [AuthenticationApiController::class, 'userProfile']);
 
-    Route::group(["prefix"=>"doctors"],function(){
+    Route::group(["prefix" => "doctors"], function () {
         Route::get("/", [DoctorApiController::class, 'index']);
         Route::get("{doctor_id}", [DoctorApiController::class, 'show']);
         Route::get("{doctor_id}/consultations", [DoctorApiController::class, 'consultations']);
     });
 
-    Route::group(["prefix"=>"dashboard"], function(){
-        Route::get("stats",[DashboardApiController::class, "stats"]);
-        Route::get("summary",[DashboardApiController::class, "summary"]);
+    Route::group(["prefix" => "services"], function () {
+        Route::get("/", [ServiceApiController::class, 'index']);
     });
 
-    Route::group(["prefix"=>"consultations"], function(){
-        Route::post("/store",[ConsultationApiController::class, 'store']);
-        Route::get("/{consultation_id}",[ConsultationApiController::class, 'show']);
+    Route::group(["prefix" => "dashboard"], function () {
+        Route::get("stats", [DashboardApiController::class, "stats"]);
+        Route::get("summary", [DashboardApiController::class, "summary"]);
     });
 
-    Route::group(["prefix"=>"patients"],function(){
+    Route::group(["prefix" => "consultations"], function () {
+        Route::post("/store", [ConsultationApiController::class, 'store']);
+        Route::get("/{consultation_id}", [ConsultationApiController::class, 'show']);
+    });
+
+    Route::group(["prefix" => "patients"], function () {
         Route::get("/", [PatientApiController::class, 'index']);
         Route::get("/{patient_id}", [PatientApiController::class, 'show']);
     });

@@ -20,7 +20,8 @@ class AuthenticationApiController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = User::whereEmail($request->email)->first();
             return res([
-                "api_token"=>$user->api_token
+                // "api_token"=>$user->api_token,
+                "user"=>new UserResource($user)
             ]);
         }
 
