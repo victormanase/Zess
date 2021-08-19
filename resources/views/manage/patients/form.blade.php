@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label for="">Reference no</label>
+                <label for="">Policy no</label>
                 <div>
                     <input type="text" name="reference_no" class="form-control" autocomplete="off"
                         value="{{ $patient->reference_no ?? (old('reference_no') ?? null) }}" placeholder="TZA-LDM ####-###">
